@@ -1,0 +1,29 @@
+.banner {
+  display: flex;
+  justify-content: center;
+  background-color: dodgerblue;
+  color: #bada55;
+}
+
+.card {
+  /* Add shadows to create the "card" effect */
+  background-color: azure;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  width: 200px;
+  height: 200px;
+}
+
+.container {
+  border-bottom: 5px solid silver;
+  height: 25%;
+  background-color: azure;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+p {
+  display: flex;
+  justify-content: space-evenly;
+}

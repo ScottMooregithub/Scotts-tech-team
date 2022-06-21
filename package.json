@@ -1,0 +1,28 @@
+{
+  "name": "scotts-tech-team",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ScottMooregithub/Scotts-tech-team.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ScottMooregithub/Scotts-tech-team/issues"
+  },
+  "homepage": "https://github.com/ScottMooregithub/Scotts-tech-team#readme",
+  "devDependencies": {
+    "jest": "^28.1.1"
+  },
+  "dependencies": {
+    "inquirer": "^8.2.4"
+  }
+}
