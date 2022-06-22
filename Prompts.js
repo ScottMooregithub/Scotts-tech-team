@@ -168,14 +168,70 @@ askOpener().then(() => {
   for (let i = 0; i < teamData.length; i++) {
     const role = teamData[i];
     if (role instanceof Engineer) {
-      console.log(role);
+      generateEngineerCard(role);
+      console.log(generateEngineerCard(role));
     }
     if (role instanceof Manager) {
-      console.log(role);
+      generateManagerCard(role);
     }
     if (role instanceof Intern) {
-      console.log(role);
+      generateInternCard(role);
     }
+  }
+  // takes in aall crated role data and generates a card
+  function generateManagerCard(role) {
+    return `<li>
+      <div>Name:${role.name}</div>
+      <div>id:${role.id}</div>
+      <div>email:${role.email}</div>
+      <div>Office Number:${role.officenumber}</div>
+    </li>`;
+  }
+
+  function generateEngineerCard(role) {
+    return `<li>
+      <div>Name:${role.name}</div>
+      <div>id:${role.id}</div>
+      <div>email:${role.email}</div>
+      <div>Github:${role.github}</div>
+    </li>`;
+  }
+
+  function generateInternCard(role) {
+    return `<li>
+      <div>Name:${role.name}</div>
+      <div>id:${role.id}</div>
+      <div>email:${role.email}</div>
+      <div>School:${role.school}</div>
+    </li>`;
+  }
+  // FUNCTION THAT Holds template literal for generated page
+  function generatePage(role) {
+    console.log();
+    /*html*/
+    return `
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <link rel="stylesheet" href="style.css" />
+  <title>Scotts Wild Wacky Team</title>
+  </head>
+  <body>
+  <h1 class="banner">Scotss Wild Wacky Team!</h1>
+  <div class="card">
+  <div class="container">
+  <li></li>
+  </div>
+  <p class="name"></p>
+  <p class="id">5</p>
+  <p class="github">tBezman.github</p>
+  </div>
+  
+  </body>
+  `;
   }
   // Generates the HTML page
   fs.writeFile("cardpage.html", generatePage(teamData), (err) => {
@@ -198,52 +254,21 @@ askOpener().then(() => {
 
 // style data using css
 
-// FUNCTION THAT Holds template literal for generated page
-function generatePage(role) {
-  console.log();
-  /*html*/
-  return `
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <link rel="stylesheet" href="style.css" />
-  <title>Scotts Wild Wacky Team</title>
-  </head>
-  <body>
-  <h1 class="banner">Scotss Wild Wacky Team!</h1>
-  <div class="card">
-  <div class="container">
-  <b>Engineer</b>
-  </div>
-  <p class="name">${role.name}</p>
-  <p class="id">5</p>
-  <p class="github">tBezman.github</p>
-  </div>
-  
-  </body>
-  `;
-}
+// const mockTeam = [
+//   new Engineer("terence", 5, "tbez@github"),
+//   new Manager("lucas", 6, "csgoDaddy@gmail", "69"),
+//   new Intern("scott", 4, "sm@gmail", "none"),
+// ];
 
-const mockTeam = [
-  new Engineer("terence", 5, "tbez@github"),
-  new Manager("lucas", 6, "csgoDaddy@gmail", "69"),
-  new Intern("scott", 4, "sm@gmail", "none"),
-];
-
-for (let i = 0; i < mockTeam.length; i++) {
-  const role = mockTeam[i];
-  if (role instanceof Engineer) {
-    console.log(role);
-  }
-  if (role instanceof Manager) {
-    console.log(role);
-  }
-  if (role instanceof Intern) {
-    console.log(role);
-  }
-}
-
-function renderEmployeee(teamData) {}
+// for (let i = 0; i < mockTeam.length; i++) {
+//   const role = mockTeam[i];
+//   if (role instanceof Engineer) {
+//     console.log(role);
+//   }
+//   if (role instanceof Manager) {
+//     console.log(role);
+//   }
+//   if (role instanceof Intern) {
+//     console.log(role);
+//   }
+// }
