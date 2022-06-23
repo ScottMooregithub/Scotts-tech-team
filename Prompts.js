@@ -8,6 +8,8 @@ const Employee = require("./lib/Employee");
 
 const teamData = [];
 
+let allcards = "";
+
 const moveAlong = {
   type: "list",
   messsage: "Would you like to",
@@ -116,10 +118,23 @@ async function addManager() {
     answers.email,
     answers.officenumber
   );
+  // takes in aall crated role data and generates a card
+
+  const managerHtml = generateManagerCard(manager);
+  allcards = allcards + managerHtml;
+
   // pass answers to function to run the if statement below
   await handleNextChoice(answers);
   // push manager data to array
   teamData.push(manager);
+}
+function generateManagerCard(manager) {
+  return `<li>
+    <div>Name:${manager.name}</div>
+    <div>id:${manager.id}</div>
+    <div>email:${manager.email}</div>
+    <div>Office Number:${manager.officenumber}</div>
+  </li>`;
 }
 
 async function addEngineer() {
@@ -130,6 +145,10 @@ async function addEngineer() {
     answers.email,
     answers.github
   );
+  // create engineerHtml because you dont know how many user will select
+  const engineerHtml = generateEngineerCard(engineer);
+  allcards = allcards + engineerHtml;
+
   await handleNextChoice(answers);
   // pushing engineer data to array
   teamData.push(engineer);
@@ -143,6 +162,10 @@ async function addIntern() {
     answers.email,
     answers.school
   );
+  // create engineerHtml because you dont know how many user will select
+  const internHtml = generateInternCard(intern);
+  allcards = allcards + internHtml;
+
   await handleNextChoice(answers);
   //pushing intern info to array
   teamData.push(intern);
@@ -178,15 +201,6 @@ askOpener().then(() => {
       generateInternCard(role);
     }
   }
-  // takes in aall crated role data and generates a card
-  function generateManagerCard(role) {
-    return `<li>
-      <div>Name:${role.name}</div>
-      <div>id:${role.id}</div>
-      <div>email:${role.email}</div>
-      <div>Office Number:${role.officenumber}</div>
-    </li>`;
-  }
 
   function generateEngineerCard(role) {
     return `<li>
@@ -199,14 +213,14 @@ askOpener().then(() => {
 
   function generateInternCard(role) {
     return `<li>
-      <div>Name:${role.name}</div>
-      <div>id:${role.id}</div>
-      <div>email:${role.email}</div>
-      <div>School:${role.school}</div>
+      <div class="name">Name:${role.name}</div>
+      <div class="id">id:${role.id}</div>
+      <div class="github">email:${role.email}</div>
+      <div class="github">School:${role.school}</div>
     </li>`;
   }
   // FUNCTION THAT Holds template literal for generated page
-  function generatePage(role) {
+  function generatePage() {
     console.log();
     /*html*/
     return `
@@ -223,7 +237,7 @@ askOpener().then(() => {
   <h1 class="banner">Scotss Wild Wacky Team!</h1>
   <div class="card">
   <div class="container">
-  <li></li>
+  <li>${allcards}</li>
   </div>
   <p class="name"></p>
   <p class="id">5</p>
