@@ -31,7 +31,7 @@
  Scott
 
 ## 📝 About
- Produces card elements that display a team created by user inout
+ Produces card elements that display a team created by user input
 
 
 ## ❔Questions
