@@ -50,7 +50,13 @@ const mangerQuestions = [
   {
     type: "input",
     messsage: "What is the managers office number?",
-    name: "officenumber",
+    name: "officeNumber",
+    validate: (answer) => {
+      if (isNaN(answer)) {
+        return "please enter a number";
+      }
+      return true;
+    },
   },
   // moveAlong defined at the top of Prompts.js
   moveAlong,
@@ -66,6 +72,12 @@ const engineerQuestions = [
     type: "input",
     message: "what is the employee ID of the engineer?",
     name: "id",
+    validate: (answer) => {
+      if (isNaN(answer)) {
+        return "please enter a number";
+      }
+      return true;
+    },
   },
   {
     type: "input",
@@ -90,6 +102,12 @@ const internQuestions = [
     type: "input",
     message: "What is the employee ID of the intern?",
     name: "id",
+    validate: (answer) => {
+      if (isNaN(answer)) {
+        return "please enter a number";
+      }
+      return true;
+    },
   },
   {
     type: "input",
@@ -116,7 +134,7 @@ async function addManager() {
     answers.name,
     answers.id,
     answers.email,
-    answers.officenumber
+    answers.officeNumber
   );
   // takes in aall crated role data and generates a card
 
@@ -129,12 +147,14 @@ async function addManager() {
   teamData.push(manager);
 }
 function generateManagerCard(manager) {
-  return `<li>
-    <div>Name:${manager.name}</div>
-    <div>id:${manager.id}</div>
-    <div>email:${manager.email}</div>
-    <div>Office Number:${manager.officenumber}</div>
-  </li>`;
+  return `
+    <li class="list-item">
+      <div class="card-item name" >${manager.name}</div>
+      <div class="card-item card">id:${manager.id}</div>
+      <div class="card-item card">email:${manager.email}</div>
+      <div class="card-item card">Office Number:${manager.officeNumber}</div>
+    </li>
+  `;
 }
 
 async function addEngineer() {
@@ -153,6 +173,16 @@ async function addEngineer() {
   // pushing engineer data to array
   teamData.push(engineer);
 }
+function generateEngineerCard(role) {
+  return `
+    <li class="list-item">
+      <div class="card-item name">${role.name}</div>
+      <div class="card-item card">id:${role.id}</div>
+      <div class="card-item card">email:${role.email}</div>
+      <div class="card-item card">Github:${role.github}</div>
+    </li>
+  `;
+}
 
 async function addIntern() {
   const answers = await inquirer.prompt(internQuestions);
@@ -169,6 +199,16 @@ async function addIntern() {
   await handleNextChoice(answers);
   //pushing intern info to array
   teamData.push(intern);
+}
+function generateInternCard(role) {
+  return `
+    <li class="list-item">
+      <div class="card-item name">${role.name}</div>
+      <div class="card-item card">id:${role.id}</div>
+      <div class="card-item card">email:${role.email}</div>
+      <div class="card-item card">School:${role.school}</div>
+    </li>
+  `;
 }
 
 // make an array to capture all of the teams data/ including multiple instances of the same role
@@ -202,23 +242,6 @@ askOpener().then(() => {
     }
   }
 
-  function generateEngineerCard(role) {
-    return `<li>
-      <div>Name:${role.name}</div>
-      <div>id:${role.id}</div>
-      <div>email:${role.email}</div>
-      <div>Github:${role.github}</div>
-    </li>`;
-  }
-
-  function generateInternCard(role) {
-    return `<li>
-      <div class="name">Name:${role.name}</div>
-      <div class="id">id:${role.id}</div>
-      <div class="github">email:${role.email}</div>
-      <div class="github">School:${role.school}</div>
-    </li>`;
-  }
   // FUNCTION THAT Holds template literal for generated page
   function generatePage() {
     console.log();
@@ -235,15 +258,9 @@ askOpener().then(() => {
   </head>
   <body>
   <h1 class="banner">Scotss Wild Wacky Team!</h1>
-  <div class="card">
-  <div class="container">
-  <li>${allcards}</li>
-  </div>
-  <p class="name"></p>
-  <p class="id">5</p>
-  <p class="github">tBezman.github</p>
-  </div>
-  
+     <ul class="parent-of-cards">
+          ${allcards}
+      </ul>
   </body>
   `;
   }
